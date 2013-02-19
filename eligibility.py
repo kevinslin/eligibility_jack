@@ -44,6 +44,9 @@ $Z$7777777777777777777777IZ?=~~?7O777777777777777777777$$$77
 777777777777777777777777777777777777777777777777777777777777
 """
 
+# Number of people that will be assigned housing
+LIMIT = 10
+NAMES = "eligibility.txt"
 DIVIDER = "-----------------------------------"
 
 def main():
@@ -61,17 +64,16 @@ def main():
         lines.remove(name)
         print (num, name)
         num += 1
-        time.sleep(0.5)
-        if (num == 43): print (DIVIDER)
-    print ("done")
+        #time.sleep(0.5)
+        if (num == LIMIT+1): print (DIVIDER)
     return out
 
 
 if __name__ == "__main__":
     print (mcm_crest_medium)
-    print ("Welcome to the eligibility jack of 2012 - 2013")
-    print ("People who are assigned numbers 1 to 42 are guaranteeed housing")
-    print ("Number 43 corresponds to the first place in the wait list")
+    print ("Welcome to the eligibility jack...")
+    print ("People who are assigned numbers 1 to %d are guaranteeed housing" %
+            LIMIT)
     print ("Hit any key to begin...")
     raw_input("")
     res = main()
@@ -79,10 +81,8 @@ if __name__ == "__main__":
     with open ("eligibility_results.txt", "w+") as fh:
         fh.write(DIVIDER)
         fh.write("guaranteed:\n")
-        for name in res[:42]: fh.write(str(name[0]) + ": " + name[1] + "\n")
+        for name in res[:LIMIT]: fh.write(str(name[0]) + ": " + name[1] + "\n")
         fh.write(DIVIDER)
         fh.write("waiting list:\n")
-        for name in res[42:]:
+        for name in res[LIMIT:]:
             fh.write(str(name[0]) + ": " + name[1] + "\n")
-    fh.close()
-
